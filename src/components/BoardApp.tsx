@@ -857,10 +857,7 @@ function CardShell({
         overlay && "guhr-card-overlay",
       )}
     >
-      <div className="flex items-center justify-between gap-2">
-        <span className="guhr-card-status">
-          {phaseById[card.phase].shortLabel}
-        </span>
+      <div className="flex justify-end">
         <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#EEF0F5] px-2 py-1 text-[10.5px] font-semibold text-[#3C4663]">
           <CalendarDays className="h-3 w-3 text-[#A98C45]" strokeWidth={1.9} />
           Hinzugefügt {formatShortDate(card.erstelltAm)}
