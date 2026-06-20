@@ -1124,8 +1124,8 @@ function DetailDrawer() {
         className="absolute inset-0 bg-[rgba(20,26,42,0.30)] backdrop-blur-[1.5px]"
         onClick={() => selectCard(undefined)}
       />
-      <aside className="guhr-drawer-panel absolute right-0 top-0 flex h-full flex-col overflow-hidden">
-        <div className="guhr-drawer-header relative flex-none">
+      <aside className="guhr-drawer-panel absolute right-0 top-0 h-full overflow-y-auto">
+        <div className="guhr-drawer-header relative">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-[10.5px] font-bold uppercase tracking-[0.16em] text-[var(--guhr-gold)]">
@@ -1182,7 +1182,7 @@ function DetailDrawer() {
           </div>
         </div>
 
-        <div className="drawer-body flex-1 overflow-auto px-[26px] py-[22px] pb-9">
+        <div className="drawer-body px-[26px] py-[22px] pb-9">
           <SectionTitle icon={<Mail className="h-5 w-5" />}>
             Kontaktdaten
           </SectionTitle>

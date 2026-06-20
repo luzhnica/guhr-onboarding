@@ -107,10 +107,12 @@ button:disabled {
   background: transparent;
 }
 
+.guhr-drawer-panel::-webkit-scrollbar,
 .drawer-body::-webkit-scrollbar {
   width: 8px;
 }
 
+.guhr-drawer-panel::-webkit-scrollbar-thumb,
 .drawer-body::-webkit-scrollbar-thumb {
   background: #dadde6;
   border-radius: 999px;
@@ -445,13 +447,18 @@ button:disabled {
   background: var(--guhr-panel);
   box-shadow: var(--guhr-shadow-panel);
   max-width: 92vw;
+  overflow-x: hidden;
   width: 452px;
 }
 
 .guhr-drawer-header {
   background: var(--guhr-navy);
   color: #ffffff;
-  padding: 24px 26px 22px;
+  padding: 24px 26px 28px;
+}
+
+.drawer-body {
+  background: var(--guhr-panel);
 }
 
 .guhr-section-label,
