@@ -301,8 +301,7 @@ export async function POST(request: Request) {
   if (!apiKey) {
     return Response.json(
       {
-        error:
-          "Resend ist nicht konfiguriert. Bitte RESEND_API_KEY in .env.local setzen.",
+        error: "Der E-Mail-Versand ist für diese Umgebung nicht konfiguriert.",
       },
       { status: 500 },
     );
@@ -364,8 +363,8 @@ export async function POST(request: Request) {
     return Response.json(
       {
         error: restrictedTestRecipient
-          ? "Resend benötigt eine verifizierte Absenderdomain oder einen erlaubten Test-Empfänger."
-          : "Resend konnte die E-Mail nicht versenden.",
+          ? "Der E-Mail-Versand benötigt eine verifizierte Absenderdomain oder einen erlaubten Test-Empfänger."
+          : "Die E-Mail konnte nicht versendet werden.",
         detail: errorText,
       },
       { status: resendResponse.status },

@@ -24,19 +24,7 @@ npm run lint
 npm run build
 ```
 
-Für die E-Mail-Automationen wird lokal eine `.env.local` auf Basis von `.env.example` angelegt:
-
-```bash
-RESEND_API_KEY=...
-RESEND_FROM_EMAIL=onboarding@resend.dev
-RESEND_FROM_NAME=Guhr Mandanten-Onboarding
-AUTOMATION_RECIPIENT_EMAIL=benachrichtigungen@example.com
-AUTOMATION_RECIPIENT_NAME=Onboarding-Team
-NEXT_PUBLIC_AUTOMATION_RECIPIENT_EMAIL=benachrichtigungen@example.com
-NEXT_PUBLIC_AUTOMATION_RECIPIENT_NAME=Onboarding-Team
-```
-
-Der API-Key wird nur serverseitig verwendet und darf nicht ins Repository committed werden.
+Das Board ist ohne externe Zugangsdaten lokal nutzbar. Der optionale E-Mail-Versand der Automationen wird über serverseitige Umgebungsvariablen konfiguriert; echte Zugangsdaten gehören nicht ins Repository.
 
 ## Technische Grundlage
 
@@ -66,6 +54,7 @@ Die Anwendung bildet den Weg von der ersten Anfrage bis zum aktiven Mandat ab. D
 
 - Karten per Ziehen und Ablegen ohne Seitenreload zwischen Phasen verschieben.
 - Detailansicht pro Karte mit Kontaktdaten, Qualifizierung, Zuständigkeit, Kontaktverlauf, Pflichtchecks, nächster Aufgabe und Notizen.
+- Kartenübersicht mit Mandantenname, E-Mail, Telefon, Mandatsart, Zuständigkeit, Erfassungsdatum, Statuskontext und Aufgabe/Notiz auf einen Blick.
 - Neue Mandanten direkt in jeder Spalte anlegen.
 - Zuständige Teammitglieder per Dropdown zuweisen, inklusive vorgefertigter Namen und optionaler eigener Namen/Farben.
 - Kontaktversuche mit Kanal, Status, Datum und Uhrzeit erfassen. Karten in `Neue Anfrage` zeigen erst dann eine Warnung, wenn erfolglose Kontaktversuche dokumentiert sind.
@@ -81,13 +70,14 @@ Die Aufgabenstellung fordert wichtige Kartendaten auf einen Blick, gleichzeitig 
 Direkt auf der Karte priorisiert die Anwendung:
 
 - Name und Firma,
+- E-Mail und Telefonnummer,
 - Mandatsart bzw. Rechtsform,
 - zuständiges Teammitglied,
-- Onboarding-Datum,
-- phasenbezogene Statushinweise,
-- Kontaktversuch-Warnung, wenn sie relevant ist.
+- Erfassungsdatum,
+- aktuelle Aufgabe bzw. wichtigste Notiz,
+- Kontaktversuch-Warnung oder Pflichtcheck-Fortschritt, wenn es fachlich relevant ist.
 
-E-Mail, Telefonnummer, Qualifizierungsdetails, nächste Aufgabe und Notizen stehen oben in der Detailansicht statt dauerhaft jede Karte zu überladen. So bleibt die Übersicht lesbar, auch wenn mehrere Mandate gleichzeitig sichtbar sind.
+Der Status wird bewusst nicht als zusätzliche Kapsel auf jeder Karte wiederholt, weil die Spalte bereits eindeutig zeigt, in welcher Phase sich das Mandat befindet. So bleibt der geforderte Statuskontext auf einen Blick sichtbar, ohne denselben Text doppelt anzuzeigen.
 
 ## Fachliche Logik
 
@@ -133,7 +123,7 @@ Mein Vorgehen:
 ## Aktuelle Grenzen
 
 - Der Zustand liegt in `localStorage`; die Anwendung ist damit eine lokal lauffähige Trial-Version und noch kein Mehrbenutzer-CRM.
-- E-Mail-Automationen senden aktuell an einen konfigurierten Benachrichtigungsempfänger. In einer Produktionsversion würden Teammitglieder auf echte Kanzlei-E-Mail-Adressen und providerseitige Templates gemappt.
+- E-Mail-Automationen sind als serverseitiger Benachrichtigungsfluss umgesetzt. In einer Produktionsversion würden Teammitglieder auf echte Kanzlei-E-Mail-Adressen, Rollen und providerseitige Templates gemappt.
 - Es gibt noch keine Authentifizierung und kein Rollenmodell.
 - DATEV-, Dokumentenupload- und Anfragequellen-Integrationen sind bewusst nicht enthalten, damit das Trial-Projekt fokussiert bleibt.
 
