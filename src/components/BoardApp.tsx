@@ -205,6 +205,21 @@ function contactAttemptCount(card: MandantCard) {
   return (card.kontaktHistorie?.length || 0) + legacyContactAttemptCount(card);
 }
 
+function mandateSummary(card: MandantCard) {
+  return card.rechtsform === "-"
+    ? card.typ
+    : `${card.typ} · ${card.rechtsform}`;
+}
+
+function cardTaskSummary(card: MandantCard) {
+  return (
+    card.naechsteAufgabe ||
+    card.naechsterSchritt ||
+    card.anmerkungen ||
+    "Keine Aufgabe hinterlegt"
+  );
+}
+
 function assignedTeamMemberName(name?: string) {
   return name?.trim() || "";
 }
@@ -842,7 +857,17 @@ function CardShell({
         overlay && "guhr-card-overlay",
       )}
     >
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex items-center justify-between gap-2">
+        <span className="guhr-card-status">
+          {phaseById[card.phase].shortLabel}
+        </span>
+        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#EEF0F5] px-2 py-1 text-[10.5px] font-semibold text-[#3C4663]">
+          <CalendarDays className="h-3 w-3 text-[#A98C45]" strokeWidth={1.9} />
+          Hinzugefügt {formatShortDate(card.erstelltAm)}
+        </span>
+      </div>
+
+      <div className="mt-2 flex items-start justify-between gap-2">
         <div className="min-w-0">
           <p className="truncate text-[14px] font-bold leading-[1.25] text-[var(--guhr-text)]">
             {fullName(card)}
@@ -853,16 +878,23 @@ function CardShell({
             </p>
           ) : null}
         </div>
-        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#EEF0F5] px-2 py-1 text-[11px] font-semibold text-[#3C4663]">
-          <CalendarDays className="h-3 w-3 text-[#A98C45]" strokeWidth={1.9} />
-          Onboarding seit {formatShortDate(card.erstelltAm)}
-        </span>
       </div>
 
-      <div className="mt-[11px] flex flex-wrap items-center gap-2">
+      <div className="mt-2 grid gap-1.5">
+        <div className="guhr-card-info-line">
+          <Mail className="h-[13px] w-[13px]" strokeWidth={2} />
+          <span>{card.email || "Keine E-Mail hinterlegt"}</span>
+        </div>
+        <div className="guhr-card-info-line">
+          <Phone className="h-[13px] w-[13px]" strokeWidth={2} />
+          <span>{card.telefon || "Keine Telefonnummer hinterlegt"}</span>
+        </div>
+      </div>
+
+      <div className="mt-2 flex flex-wrap items-center gap-2">
         <span className="guhr-card-type">
           <Building2 className="h-[13px] w-[13px]" strokeWidth={2} />
-          <span>{card.rechtsform === "-" ? card.typ : card.rechtsform}</span>
+          <span>{mandateSummary(card)}</span>
         </span>
         {showContactAttempts ? (
           <span
@@ -876,6 +908,14 @@ function CardShell({
             {contactAttempts}x kontaktiert
           </span>
         ) : null}
+      </div>
+
+      <div className="guhr-card-note mt-2">
+        <NotepadText className="h-[13px] w-[13px]" strokeWidth={2} />
+        <p>
+          <span>Aufgabe</span>
+          {cardTaskSummary(card)}
+        </p>
       </div>
 
       <div className="mt-3 flex items-center justify-between">

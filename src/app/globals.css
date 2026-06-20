@@ -310,6 +310,73 @@ button:disabled {
   transform: rotate(3deg) scale(1.03);
 }
 
+.guhr-card-status {
+  align-items: center;
+  background: var(--guhr-gold-soft);
+  border-radius: 999px;
+  color: #8f7438;
+  display: inline-flex;
+  font-size: 10.5px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  padding: 4px 8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.guhr-card-info-line {
+  align-items: center;
+  color: var(--guhr-muted);
+  display: flex;
+  font-size: 11.5px;
+  font-weight: 600;
+  gap: 6px;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.guhr-card-info-line svg,
+.guhr-card-note svg {
+  color: var(--guhr-gold-dark);
+  flex: 0 0 auto;
+}
+
+.guhr-card-info-line span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.guhr-card-note {
+  align-items: flex-start;
+  background: #faf8f2;
+  border: 1px solid #efe4ca;
+  border-radius: 9px;
+  color: #4d566d;
+  display: flex;
+  gap: 6px;
+  padding: 7px 8px;
+}
+
+.guhr-card-note p {
+  display: -webkit-box;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.32;
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.guhr-card-note span {
+  color: #9a7c38;
+  font-weight: 800;
+  margin-right: 5px;
+}
+
 .guhr-tag {
   align-items: center;
   border-radius: 999px;
