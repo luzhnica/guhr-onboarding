@@ -1,88 +1,76 @@
-# Trial Project Brief
+# Aufgabenstellung Trial-Projekt
 
-This file preserves the original assignment as the project scope reference. Product, UX, code, and README decisions should stay aligned with this brief: a serious, Guhr-specific Kanban CRM for tax advisory onboarding, not a generic SaaS board.
+Diese Datei hält die ursprüngliche Aufgabenstellung als fachliche Referenz für das Projekt fest. Produkt-, UX-, Code- und README-Entscheidungen sollen daran ausgerichtet bleiben: ein seriöses, Guhr-spezifisches Kanban-CRM für das Onboarding von Steuerberatungsmandaten, keine generische SaaS-Oberfläche.
 
-## Original Assignment
+## Aufgabenstellung
 
-Trial Project – AI Automation Engineer Guhr Steuerberatungsgesellschaft mbH
+Trial-Projekt - AI Automation Engineer Guhr Steuerberatungsgesellschaft mbH
 
+## Aufgabe
 
+Baue eine einfache Kanban-artige CRM-Übersicht von Grund auf, ähnlich wie Trello, zugeschnitten auf den Mandanten-Onboarding-Prozess einer Steuerberatungskanzlei.
 
-The Task
-Build a simple Kanban-style CRM board from scratch – similar to Trello – designed for the client onboarding process at a tax advisory firm.
-You decide how exactly you implement it – but we've provided some specifications below to give you the right direction. There's no single right answer – we want to see how you think about a real business process and translate it into a working product.
-Build time: a few hours. We're not looking for perfection, we're looking for how you work.
+Die genaue Umsetzung ist frei wählbar. Die folgenden Spezifikationen geben die Richtung vor. Es gibt keine einzige richtige Lösung; wichtig ist, wie ein realer Geschäftsprozess verstanden und in ein funktionierendes Produkt übersetzt wird.
 
+Geplante Bauzeit: einige Stunden. Es geht nicht um Perfektion, sondern darum, wie gearbeitet wird.
 
+## Prozessphasen
 
-Board Phases
-The board should reflect a realistic tax advisory onboarding process. We suggest the following phases – but feel free to adapt them if you have a better idea:
-	1	New Inquiry – First contact received, not yet qualified
-	2	Initial Consultation Scheduled – Meeting booked, awaiting first call
-	3	Documents Requested – Waiting for the client to submit required documents
-	4	Documents Received – All docs in, internal review in progress
-	5	Engagement Letter Sent – Contract/Mandatsvertrag sent out
-	6	Signed & Active – Client fully onboarded, handed over to the team
-	7	On Hold / Paused – Onboarding stalled for any reason
+Die Übersicht soll einen realistischen Onboarding-Prozess in einer Steuerberatungskanzlei abbilden. Vorgeschlagen sind folgende Phasen, Anpassungen sind möglich, wenn sie fachlich sinnvoll sind:
 
+1. Neue Anfrage - Erstkontakt ist eingegangen, aber noch nicht qualifiziert
+2. Erstgespräch geplant - Termin ist gebucht, erstes Gespräch steht aus
+3. Unterlagen angefordert - Mandant soll die erforderlichen Dokumente einreichen
+4. Unterlagen erhalten - Unterlagen liegen vor, interne Prüfung läuft
+5. Mandatsvertrag versendet - Vertrag bzw. Mandatsvertrag wurde versendet
+6. Unterzeichnet & aktiv - Mandant ist vollständig aufgenommen und an das Team übergeben
+7. Pausiert - Onboarding stockt aus irgendeinem Grund
 
+## Karteninformationen
 
-Card Information
-Each card should display at least the following information at a glance:
-	•	Client name
-	•	Contact email
-	•	Phone number
-	•	Type of mandate (e.g. Einkommensteuer, GmbH, Freelancer, etc.)
-	•	Assigned team member
-	•	Date added
-	•	A status tag or color indicator
-	•	Notes / next steps field
+Jede Karte soll mindestens folgende Informationen auf einen Blick anzeigen:
 
+- Mandantenname
+- Kontakt-E-Mail
+- Telefonnummer
+- Mandatsart, zum Beispiel Einkommensteuer, GmbH, Freiberufler usw.
+- Zugewiesenes Teammitglied
+- Erfassungsdatum
+- Status-Tag oder farblicher Statushinweis
+- Notizen bzw. nächste Schritte
 
+## Nutzung & Interaktion
 
-UX & Interaction
-	•	Drag & drop between columns (smooth, no page reload)
-	•	Ability to open a card for full detail view
-	•	Option to add a new card directly within any column
-	•	Clean, uncluttered layout – easy to use for non-technical staff
+- Ziehen und Ablegen zwischen Spalten, flüssig und ohne Seitenreload
+- Karte für eine vollständige Detailansicht öffnen
+- Neue Karte direkt in jeder Spalte anlegen
+- Klare, aufgeräumte Oberfläche, die auch für nicht-technische Mitarbeitende leicht nutzbar ist
 
+## Design & Markenauftritt
 
+- Die Übersicht soll die visuelle Identität von `guhr-steuerberatung.de` aufgreifen
+- Farbpalette, typografische Anmutung und Gesamtästhetik sollen dazu passen
+- Professionell, vertrauenswürdig und sauber, nicht wie eine generische Software-Vorlage
+- Es soll sich so anfühlen, als wäre es konkret für Guhr gebaut, nicht als austauschbares Standard-Tool
 
-Design & Branding
-	•	The board should reflect the visual identity of our website: guhr-steuerberatung.de
-	•	Match the color palette, typography feel, and overall aesthetic
-	•	Professional, trustworthy, clean – not a generic SaaS template look
-	•	Should feel like it was built specifically for Guhr, not a white-label tool
+## Abgabe
 
+1. Eine funktionierende Anwendung, gehostet oder lokal lauffähig
+2. Ein Link zum Code-Repository, zum Beispiel GitHub oder GitLab
+3. Ein kurzer Bericht oder Durchgang, zum Beispiel README, Loom-Video oder Ähnliches, mit:
+   - gewählter technischer Grundlage und Begründung
+   - Arbeitsweise, Vorgehen und genutzten Tools, inklusive KI-Tools oder Vorlagen
+   - ehrlicher Zeiteinschätzung
+   - Verbesserungen oder Ergänzungen mit mehr Zeit
 
+## Bewertungskriterien
 
-Deliverables
-	1	A working application (hosted or runnable locally)
-	2	A link to your code repository (GitHub, GitLab, etc.)
-	3	A short write-up or walkthrough (README, Loom video, or similar) covering:
-	◦	Which tech stack you chose and why
-	◦	How your workflow looked – how you approached the problem, which tools you used (AI tools, boilerplates, etc.)
-	◦	How long it took you – be honest, we want to understand how you work, not just the end result
-	◦	What you'd improve or add with more time
+- Kreativität: Wurde über den tatsächlichen Anwendungsfall nachgedacht oder nur eine generische Übersicht gebaut?
+- Codequalität: Ist der Code sauber, lesbar und wartbar?
+- Nutzererlebnis: Wirkt die Anwendung intuitiv und angenehm für nicht-technische Mitarbeitende?
+- Technische Grundlage: Wurde eine sinnvolle technische Entscheidung getroffen und kann sie erklärt werden?
+- Geschwindigkeit: Kann in kurzer Zeit etwas Solides geliefert werden?
 
+## Einreichung
 
-
-What we care about
-Criteria
-What we're looking for
-Creativity
-Did you think about the actual use case or just build a generic board?
-Code Quality
-Is the code clean, readable, and maintainable?
-User Experience
-Does it feel intuitive? Would a non-technical person enjoy using it?
-Tech Stack
-Did you make a thoughtful decision – and can you explain it?
-Speed
-Can you ship something solid in a short amount of time?
-
-
-
-Submission
-Please send your submission to job.568gu.guhr@recruitee-inbox.com within 4 days - including the repo link and your write-up.
-Questions? Just reply to this email.
+Die Abgabe soll innerhalb von 4 Tagen inklusive Repository-Link und Bericht an `job.568gu.guhr@recruitee-inbox.com` gesendet werden.

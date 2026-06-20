@@ -293,7 +293,7 @@ function htmlContent(kind: EmailAutomationKind, card: MandantCard) {
 export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   const senderEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
-  const senderName = process.env.RESEND_FROM_NAME || "Guhr Onboarding Board";
+  const senderName = process.env.RESEND_FROM_NAME || "Guhr Mandanten-Onboarding";
   const fallbackRecipientEmail =
     process.env.AUTOMATION_RECIPIENT_EMAIL ||
     process.env.NEXT_PUBLIC_AUTOMATION_RECIPIENT_EMAIL ||

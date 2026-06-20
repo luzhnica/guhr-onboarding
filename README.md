@@ -1,55 +1,55 @@
-# Guhr Mandanten-Onboarding-Board
+# Guhr Mandanten-Onboarding
 
-Kanban-style CRM board for the client onboarding process at Guhr Steuerberatungsgesellschaft mbH. The app is built as a focused trial project: serious enough to review in a GitHub repository, lightweight enough to run locally, and specific to a tax advisory onboarding workflow instead of a generic Trello clone.
+Kanban-CRM für den Mandanten-Onboarding-Prozess der Guhr Steuerberatungsgesellschaft mbH. Die Anwendung ist als fokussiertes Trial-Projekt gebaut: seriös genug für die Prüfung im GitHub-Repository, schlank genug für einen schnellen lokalen Start und fachlich auf den Kanzlei-Onboarding-Prozess zugeschnitten statt auf ein generisches Trello-Klon-Layout.
 
-The product scope follows the original assignment in [docs/trial-project-brief.md](docs/trial-project-brief.md).
+Der fachliche Rahmen orientiert sich an der ursprünglichen Aufgabenstellung in [docs/trial-project-brief.md](docs/trial-project-brief.md).
 
-## Live Application
+## Live-Anwendung
 
-The deployed application is available at [https://guhr.albo.systems](https://guhr.albo.systems).
+Die deployte Anwendung ist unter [https://guhr.albo.systems](https://guhr.albo.systems) erreichbar.
 
-## Local Start
+## Lokaler Start
 
 ```bash
 npm install
 npm run dev
 ```
 
-The app then runs at [http://localhost:3000](http://localhost:3000).
+Die Anwendung läuft anschließend unter [http://localhost:3000](http://localhost:3000).
 
-Useful checks before review:
+Nützliche Checks vor der Abgabe:
 
 ```bash
 npm run lint
 npm run build
 ```
 
-For the email notification automation, create a local `.env.local` based on `.env.example`:
+Für die E-Mail-Automationen wird lokal eine `.env.local` auf Basis von `.env.example` angelegt:
 
 ```bash
 RESEND_API_KEY=...
 RESEND_FROM_EMAIL=onboarding@resend.dev
-RESEND_FROM_NAME=Guhr Onboarding Board
-AUTOMATION_RECIPIENT_EMAIL=notifications@example.com
-AUTOMATION_RECIPIENT_NAME=Onboarding Team
-NEXT_PUBLIC_AUTOMATION_RECIPIENT_EMAIL=notifications@example.com
-NEXT_PUBLIC_AUTOMATION_RECIPIENT_NAME=Onboarding Team
+RESEND_FROM_NAME=Guhr Mandanten-Onboarding
+AUTOMATION_RECIPIENT_EMAIL=benachrichtigungen@example.com
+AUTOMATION_RECIPIENT_NAME=Onboarding-Team
+NEXT_PUBLIC_AUTOMATION_RECIPIENT_EMAIL=benachrichtigungen@example.com
+NEXT_PUBLIC_AUTOMATION_RECIPIENT_NAME=Onboarding-Team
 ```
 
-The API key is server-side only and must not be committed.
+Der API-Key wird nur serverseitig verwendet und darf nicht ins Repository committed werden.
 
-## Tech Stack
+## Technische Grundlage
 
-- **Next.js App Router + TypeScript** for a maintainable React application with clear component and state boundaries.
-- **Tailwind CSS** for fast, consistent styling and a Guhr-specific visual system.
-- **dnd-kit** for smooth drag and drop between onboarding phases.
-- **Zustand + localStorage** for a runnable local version without requiring a backend.
-- **lucide-react** for restrained interface icons.
-- **Hanken Grotesk** via `next/font` for the clean, professional typography used in the UI.
+- **Next.js App Router + TypeScript** für eine wartbare React-Anwendung mit klaren Komponenten- und State-Grenzen.
+- **Tailwind CSS** für schnelles, konsistentes Styling und ein Guhr-spezifisches visuelles System.
+- **dnd-kit** für flüssiges Ziehen und Ablegen zwischen den Onboarding-Phasen.
+- **Zustand + localStorage** für eine lokal lauffähige Version ohne zusätzliches Backend.
+- **lucide-react** für zurückhaltende Oberflächen-Icons.
+- **Hanken Grotesk** über `next/font` für die klare, professionelle Typografie der Oberfläche.
 
-## Product Flow
+## Produktfluss
 
-The board maps the onboarding process from first inquiry to active mandate. The phases are:
+Die Anwendung bildet den Weg von der ersten Anfrage bis zum aktiven Mandat ab. Die Prozessphasen sind:
 
 1. Neue Anfrage
 2. Erstgespräch geplant
@@ -60,92 +60,92 @@ The board maps the onboarding process from first inquiry to active mandate. The 
 7. Pausiert
 8. Verloren
 
-`Pausiert` and `Verloren` are included as practical off-pipeline states. They keep stalled or declined opportunities visible without mixing them into the active onboarding flow.
+`Pausiert` und `Verloren` sind bewusst als Status außerhalb des aktiven Prozesses enthalten. So bleiben stockende oder abgesagte Fälle sichtbar, ohne den aktiven Onboarding-Fluss zu vermischen.
 
-## Core Features
+## Kernfunktionen
 
-- Drag and drop cards between phases without a page reload.
-- Detail drawer for each card with contact data, qualification data, team ownership, contact history, checklist progress, next task and notes.
-- Add a new mandate directly in any column.
-- Assign a responsible team member through a dropdown, with default members and the option to add custom names and colors.
-- Track contact attempts with channel, status, date and time. Cards in `Neue Anfrage` show a visible warning only after unsuccessful contact attempts.
-- Keep onboarding checklist progress visible only when it is relevant to the current phase, instead of showing early `0/5` warnings before the checklist work has started.
-- Prevent moving a mandate to `Unterzeichnet & aktiv` until the required onboarding checks are complete.
-- Confirm automation-triggering moves before they run, so accidental drag-and-drop does not send emails.
-- Send notification emails for appointment preparation, internal review, mandatory-check follow-up and team handover workflows.
+- Karten per Ziehen und Ablegen ohne Seitenreload zwischen Phasen verschieben.
+- Detailansicht pro Karte mit Kontaktdaten, Qualifizierung, Zuständigkeit, Kontaktverlauf, Pflichtchecks, nächster Aufgabe und Notizen.
+- Neue Mandanten direkt in jeder Spalte anlegen.
+- Zuständige Teammitglieder per Dropdown zuweisen, inklusive vorgefertigter Namen und optionaler eigener Namen/Farben.
+- Kontaktversuche mit Kanal, Status, Datum und Uhrzeit erfassen. Karten in `Neue Anfrage` zeigen erst dann eine Warnung, wenn erfolglose Kontaktversuche dokumentiert sind.
+- Pflichtcheck-Fortschritt erst dann anzeigen, wenn er in der jeweiligen Phase relevant ist.
+- Wechsel zu `Unterzeichnet & aktiv` blockieren, solange die erforderlichen Pflichtchecks nicht erledigt sind.
+- Automationsauslösende Statuswechsel bestätigen lassen, damit versehentliches Ziehen und Ablegen keine E-Mails verschickt.
+- Benachrichtigungs-E-Mails für Gesprächsvorbereitung, interne Prüfung, Pflichtcheck-Nachfassung und Übergabe an die laufende Betreuung senden.
 
-## UX Decisions
+## UX-Entscheidungen
 
-The brief asks for important card information at a glance, while also asking for a clean, uncluttered layout for non-technical staff. I interpreted that as a scanning-first board: each card shows the information needed to judge ownership and next operational state quickly, while sensitive or longer details are one click away in the drawer.
+Die Aufgabenstellung fordert wichtige Kartendaten auf einen Blick, gleichzeitig aber eine klare, nicht überladene Oberfläche für nicht-technische Mitarbeitende. Ich habe das als scan-orientierte Übersicht interpretiert: Die Karte zeigt die Informationen, die für schnelle Priorisierung und Zuständigkeit wichtig sind; längere oder sensiblere Details liegen einen Klick entfernt in der Detailansicht.
 
-On the card itself, the app prioritizes:
+Direkt auf der Karte priorisiert die Anwendung:
 
-- client name and company,
-- mandate type/legal form,
-- assigned team member,
-- onboarding date,
-- phase-relevant status indicators,
-- contact-attempt warning when relevant.
+- Name und Firma,
+- Mandatsart bzw. Rechtsform,
+- zuständiges Teammitglied,
+- Onboarding-Datum,
+- phasenbezogene Statushinweise,
+- Kontaktversuch-Warnung, wenn sie relevant ist.
 
-Email, phone number, qualification details, next task and notes are placed at the top of the drawer instead of permanently crowding every card. This keeps the board readable when many mandates are visible at once, while still making the full CRM record immediately accessible.
+E-Mail, Telefonnummer, Qualifizierungsdetails, nächste Aufgabe und Notizen stehen oben in der Detailansicht statt dauerhaft jede Karte zu überladen. So bleibt die Übersicht lesbar, auch wenn mehrere Mandate gleichzeitig sichtbar sind.
 
-## Domain Logic
+## Fachliche Logik
 
-- New inquiries stay in `Neue Anfrage` even when a team member tried to call or email them. Instead of creating another pipeline column, contact attempts are marked directly on the card.
-- Checklist progress appears from `Unterlagen angefordert` onward, or earlier only once a checklist item has actually been started.
-- `Nicht zugewiesen` is the default team state and is visually neutral. Assigned team members are shown as colored capsules.
-- The activation gate requires GwG identification, power of attorney, signed engagement letter, SEPA mandate and DATEV setup before a card can become active.
-- Lost mandates carry a loss reason so the pipeline does not silently hide why an inquiry dropped out.
-- Automation triggers are intentionally explicit: the user sees a preview and must confirm before an email is sent or the status change is logged.
+- Neue Anfragen bleiben in `Neue Anfrage`, auch wenn ein Teammitglied bereits angerufen oder geschrieben hat. Statt eine zusätzliche Pipeline-Spalte einzuführen, werden Kontaktversuche direkt auf der Karte markiert.
+- Pflichtchecks erscheinen ab `Unterlagen angefordert` oder früher nur dann, wenn bereits ein Pflichtcheck begonnen wurde.
+- `Nicht zugewiesen` ist der neutrale Standardzustand für die Zuständigkeit. Zugewiesene Teammitglieder erscheinen als farbliche Kapseln.
+- Die Aktivierung erfordert GwG-Identifizierung, Vollmacht, unterschriebenen Mandatsvertrag, SEPA-Mandat und DATEV-Anlage.
+- Verlorene Mandate erhalten einen Grund, damit nicht unsichtbar bleibt, warum eine Anfrage ausgeschieden ist.
+- Automationen sind bewusst explizit: Die Nutzer sehen vorab, was passiert, und müssen bestätigen, bevor eine E-Mail gesendet oder ein Statuswechsel protokolliert wird.
 
-## Automations
+## Automationen
 
-The board includes four automation points:
+Die Anwendung enthält vier Automationspunkte:
 
-- **Erstgespräch geplant**: email with appointment-preparation context for the responsible person.
-- **Unterlagen erhalten**: email to the configured notification recipient with an internal review task.
-- **Mandatsvertrag versendet**: email to the configured notification recipient with open mandatory checks before activation.
-- **Unterzeichnet & aktiv**: email to the configured notification recipient for handover into ongoing support.
+- **Erstgespräch geplant**: E-Mail mit Kontext zur Gesprächsvorbereitung an die zuständige Person.
+- **Unterlagen erhalten**: E-Mail mit interner Prüfaufgabe an den konfigurierten Benachrichtigungsempfänger.
+- **Mandatsvertrag versendet**: E-Mail mit offenen Pflichtchecks vor der Aktivierung.
+- **Unterzeichnet & aktiv**: E-Mail zur Übergabe an die laufende Betreuung.
 
-Before any of these actions run, the board opens a confirmation dialog showing what will happen. Cancelling the dialog leaves the card in its original phase.
+Vor jeder dieser Aktionen öffnet sich ein Bestätigungsdialog. Wird der Dialog abgebrochen, bleibt die Karte in ihrer ursprünglichen Phase.
 
-## Seed Data
+## Beispieldaten
 
-The seed data includes realistic sample mandates across common tax advisory cases:
+Die Beispieldaten zeigen realistische Mandatsfälle aus typischen Steuerberatungskontexten:
 
-- GmbH, UG, GbR, GmbH & Co. KG, OHG, freelancers, trades and small businesses.
-- Different onboarding stages, checklist states, due dates and team assignments.
-- Paused and lost cases to show how non-linear onboarding situations are handled.
+- GmbH, UG, GbR, GmbH & Co. KG, OHG, Freiberufler, Handwerk und Kleinunternehmen.
+- Unterschiedliche Onboarding-Phasen, Pflichtcheck-Stände, Fälligkeiten und Zuständigkeiten.
+- Pausierte und verlorene Fälle, um nicht-lineare Onboarding-Situationen abzubilden.
 
-The data is intentionally fictional and only used to demonstrate the workflow.
+Die Daten sind bewusst fiktiv und dienen nur zur Darstellung des Workflows.
 
-## Workflow And Tools
+## Vorgehen und Tools
 
-My approach was:
+Mein Vorgehen:
 
-1. Preserve the original task in `docs/trial-project-brief.md` and use it as the scope anchor.
-2. Build a small Next.js application instead of relying on a Trello template or generic board UI.
-3. Model the onboarding process first, then add UI interactions around real Kanzlei tasks: contact attempts, document status, assignment and activation checks.
-4. Iterate on the board and drawer layout to reduce noise while keeping important information reachable.
-5. Use AI assistance through Codex for implementation speed, copy review and refactoring suggestions. Product decisions and final edits were reviewed manually against the assignment.
-6. Validate with local linting and production build checks.
+1. Die ursprüngliche Aufgabenstellung in `docs/trial-project-brief.md` als fachlichen Anker festhalten.
+2. Eine kleine Next.js-Anwendung bauen, statt ein Trello-Template oder eine generische Board-Oberfläche zu verwenden.
+3. Erst den Onboarding-Prozess modellieren und dann UI-Interaktionen rund um reale Kanzlei-Aufgaben ergänzen: Kontaktversuche, Dokumentenstatus, Zuständigkeit und Aktivierungschecks.
+4. Übersicht und Detailansicht iterativ reduzieren, damit die Oberfläche ruhig bleibt und wichtige Informationen trotzdem schnell erreichbar sind.
+5. KI-Unterstützung über Codex für schnellere Implementierung, Textprüfung und Refactoring genutzt. Produktentscheidungen und finale Änderungen wurden manuell gegen die Aufgabenstellung geprüft.
+6. Mit lokalen Lint-, Build- und Sicherheitschecks sowie einem Live-Deployment validiert.
 
-## Current Limitations
+## Aktuelle Grenzen
 
-- State is stored in `localStorage`, so this is a local trial version rather than a multi-user production CRM.
-- Email automations currently send to a configured notification recipient. A production version would map team members to real work email addresses and use provider-managed templates.
-- There is no authentication or role model yet.
-- DATEV, document upload and inquiry-source integrations are intentionally left out to keep the trial focused.
+- Der Zustand liegt in `localStorage`; die Anwendung ist damit eine lokal lauffähige Trial-Version und noch kein Mehrbenutzer-CRM.
+- E-Mail-Automationen senden aktuell an einen konfigurierten Benachrichtigungsempfänger. In einer Produktionsversion würden Teammitglieder auf echte Kanzlei-E-Mail-Adressen und providerseitige Templates gemappt.
+- Es gibt noch keine Authentifizierung und kein Rollenmodell.
+- DATEV-, Dokumentenupload- und Anfragequellen-Integrationen sind bewusst nicht enthalten, damit das Trial-Projekt fokussiert bleibt.
 
-## With More Time
+## Mit mehr Zeit
 
-- Replace `localStorage` with a backend such as Postgres plus Prisma.
-- Add user accounts, roles and shared team state.
-- Connect n8n or additional provider-side workflows for multi-step notification automations.
-- Add document upload/review states and DATEV handover support.
-- Add analytics for bottlenecks, for example where inquiries stall most often.
-- Add audit history per mandate for a more complete CRM record.
+- `localStorage` durch ein Backend wie Postgres mit Prisma ersetzen.
+- Benutzerkonten, Rollen und gemeinsamen Team-Zustand ergänzen.
+- n8n oder weitere providerseitige Workflows für mehrstufige Automationen anbinden.
+- Dokumentenupload, Dokumentenprüfung und DATEV-Übergabe ergänzen.
+- Auswertungen zu Engpässen ergänzen, zum Beispiel in welchen Phasen Anfragen am häufigsten stocken.
+- Vollständigere Änderungshistorie pro Mandat ergänzen.
 
-## Time Spent
+## Zeitaufwand
 
-Initial build plus UX iterations, automation wiring, README, deployment and validation: approximately 5-6 focused hours.
+Initialer Aufbau inklusive UX-Iterationen, Automationsanbindung, README, Deployment und Validierung: ungefähr 5-6 fokussierte Stunden.

@@ -487,7 +487,7 @@ export default function BoardApp() {
       <main className="min-h-0 flex-1 overflow-hidden px-7 pb-[26px] pt-[18px] max-xl:overflow-x-hidden max-xl:overflow-y-visible max-md:px-5">
         {!hydrated ? (
           <div className="guhr-card text-[13.5px] text-[var(--guhr-muted)]">
-            Board wird geladen ...
+            Übersicht wird geladen ...
           </div>
         ) : (
           <div className="guhr-board-grid">
@@ -503,7 +503,7 @@ export default function BoardApp() {
               }}
             >
               <section
-                aria-label="Mandanten-Onboarding-Board"
+                aria-label="Mandanten-Onboarding-Übersicht"
                 className="board-scroll h-full min-h-0 w-full min-w-0 max-w-full overflow-x-auto overflow-y-hidden pb-2"
               >
                 <div className="flex h-full min-h-0 items-start gap-4">
