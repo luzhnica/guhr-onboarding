@@ -1,43 +1,20 @@
 # Guhr Mandanten-Onboarding
 
-Kanban-CRM für den Mandanten-Onboarding-Prozess der Guhr Steuerberatungsgesellschaft mbH. Die Anwendung ist als fokussiertes Trial-Projekt gebaut: seriös genug für die Prüfung im GitHub-Repository, schlank genug für einen schnellen lokalen Start und fachlich auf den Kanzlei-Onboarding-Prozess zugeschnitten statt auf ein generisches Trello-Klon-Layout.
+Dieses Projekt ist meine Umsetzung der Trial-Aufgabe für Guhr Steuerberatungsgesellschaft mbH: ein Kanban-artiges CRM-Board für den Mandanten-Onboarding-Prozess einer Steuerberatungskanzlei.
 
-Der fachliche Rahmen orientiert sich an der ursprünglichen Aufgabenstellung in [docs/trial-project-brief.md](docs/trial-project-brief.md).
+Die Anwendung ist nicht als generisches Trello-Board gedacht, sondern als fachlich zugeschnittener Arbeitsbereich für Kanzlei-Mitarbeitende: Anfragen aufnehmen, Zuständigkeiten klären, Kontaktversuche dokumentieren, Unterlagen verfolgen und Mandate sauber bis zur Aktivierung begleiten.
 
-## Live-Anwendung
+## Anwendung ansehen
 
-Die deployte Anwendung ist unter [https://guhr.albo.systems](https://guhr.albo.systems) erreichbar.
+Die Live-Version ist hier erreichbar:
 
-## Lokaler Start
+[https://guhr.albo.systems](https://guhr.albo.systems)
 
-```bash
-npm install
-npm run dev
-```
+Die ursprüngliche Aufgabenstellung liegt als Referenz in [docs/trial-project-brief.md](docs/trial-project-brief.md).
 
-Die Anwendung läuft anschließend unter [http://localhost:3000](http://localhost:3000).
+## Was gebaut wurde
 
-Nützliche Checks vor der Abgabe:
-
-```bash
-npm run lint
-npm run build
-```
-
-Das Board ist ohne externe Zugangsdaten lokal nutzbar. Der optionale E-Mail-Versand der Automationen wird über serverseitige Umgebungsvariablen konfiguriert; echte Zugangsdaten gehören nicht ins Repository.
-
-## Technische Grundlage
-
-- **Next.js App Router + TypeScript** für eine wartbare React-Anwendung mit klaren Komponenten- und State-Grenzen.
-- **Tailwind CSS** für schnelles, konsistentes Styling und ein Guhr-spezifisches visuelles System.
-- **dnd-kit** für flüssiges Ziehen und Ablegen zwischen den Onboarding-Phasen.
-- **Zustand + localStorage** für eine lokal lauffähige Version ohne zusätzliches Backend.
-- **lucide-react** für zurückhaltende Oberflächen-Icons.
-- **Hanken Grotesk** über `next/font` für die klare, professionelle Typografie der Oberfläche.
-
-## Produktfluss
-
-Die Anwendung bildet den Weg von der ersten Anfrage bis zum aktiven Mandat ab. Die Prozessphasen sind:
+Das Board bildet den Weg vom neuen Interessenten bis zum aktiven Mandat ab:
 
 1. Neue Anfrage
 2. Erstgespräch geplant
@@ -48,94 +25,84 @@ Die Anwendung bildet den Weg von der ersten Anfrage bis zum aktiven Mandat ab. D
 7. Pausiert
 8. Verloren
 
-`Pausiert` und `Verloren` sind bewusst als Status außerhalb des aktiven Prozesses enthalten. So bleiben stockende oder abgesagte Fälle sichtbar, ohne den aktiven Onboarding-Fluss zu vermischen.
+`Pausiert` und `Verloren` sind bewusst ergänzt. In echten Onboarding-Prozessen verschwinden Fälle selten einfach; sie stocken, werden später wieder relevant oder fallen aus nachvollziehbaren Gründen heraus.
 
-## Kernfunktionen
+## Zentrale Funktionen
 
-- Karten per Ziehen und Ablegen ohne Seitenreload zwischen Phasen verschieben.
-- Detailansicht pro Karte mit Kontaktdaten, Qualifizierung, Zuständigkeit, Kontaktverlauf, Pflichtchecks, nächster Aufgabe und Notizen.
-- Kartenübersicht mit Mandantenname, E-Mail, Telefon, Mandatsart, Zuständigkeit, Erfassungsdatum, Statuskontext und Aufgabe/Notiz auf einen Blick.
+- Mandantenkarten per Drag & Drop zwischen den Phasen verschieben.
+- Auf jeder Karte die wichtigsten Informationen direkt sehen: Name, Firma, E-Mail, Telefon, Mandatsart, Zuständigkeit, Erfassungsdatum und aktuelle Aufgabe oder Notiz.
+- Eine Karte öffnen, um alle Details zu bearbeiten: Kontaktdaten, Qualifizierung, Zuständigkeit, Kontaktverlauf, Pflichtschritte, nächste Aufgabe und Notizen.
 - Neue Mandanten direkt in jeder Spalte anlegen.
-- Zuständige Teammitglieder per Dropdown zuweisen, inklusive vorgefertigter Namen und optionaler eigener Namen/Farben.
-- Kontaktversuche mit Kanal, Status, Datum und Uhrzeit erfassen. Karten in `Neue Anfrage` zeigen erst dann eine Warnung, wenn erfolglose Kontaktversuche dokumentiert sind.
-- Pflichtcheck-Fortschritt erst dann anzeigen, wenn er in der jeweiligen Phase relevant ist.
-- Wechsel zu `Unterzeichnet & aktiv` blockieren, solange die erforderlichen Pflichtchecks nicht erledigt sind.
-- Automationsauslösende Statuswechsel bestätigen lassen, damit versehentliches Ziehen und Ablegen keine E-Mails verschickt.
-- Benachrichtigungs-E-Mails für Gesprächsvorbereitung, interne Prüfung, Pflichtcheck-Nachfassung und Übergabe an die laufende Betreuung senden.
-
-## UX-Entscheidungen
-
-Die Aufgabenstellung fordert wichtige Kartendaten auf einen Blick, gleichzeitig aber eine klare, nicht überladene Oberfläche für nicht-technische Mitarbeitende. Ich habe das als scan-orientierte Übersicht interpretiert: Die Karte zeigt die Informationen, die für schnelle Priorisierung und Zuständigkeit wichtig sind; längere oder sensiblere Details liegen einen Klick entfernt in der Detailansicht.
-
-Direkt auf der Karte priorisiert die Anwendung:
-
-- Name und Firma,
-- E-Mail und Telefonnummer,
-- Mandatsart bzw. Rechtsform,
-- zuständiges Teammitglied,
-- Erfassungsdatum,
-- aktuelle Aufgabe bzw. wichtigste Notiz,
-- Kontaktversuch-Warnung oder Pflichtcheck-Fortschritt, wenn es fachlich relevant ist.
-
-Der Status wird bewusst nicht als zusätzliche Kapsel auf jeder Karte wiederholt, weil die Spalte bereits eindeutig zeigt, in welcher Phase sich das Mandat befindet. So bleibt der geforderte Statuskontext auf einen Blick sichtbar, ohne denselben Text doppelt anzuzeigen.
-
-## Fachliche Logik
-
-- Neue Anfragen bleiben in `Neue Anfrage`, auch wenn ein Teammitglied bereits angerufen oder geschrieben hat. Statt eine zusätzliche Pipeline-Spalte einzuführen, werden Kontaktversuche direkt auf der Karte markiert.
-- Pflichtchecks erscheinen ab `Unterlagen angefordert` oder früher nur dann, wenn bereits ein Pflichtcheck begonnen wurde.
-- `Nicht zugewiesen` ist der neutrale Standardzustand für die Zuständigkeit. Zugewiesene Teammitglieder erscheinen als farbliche Kapseln.
-- Die Aktivierung erfordert GwG-Identifizierung, Vollmacht, unterschriebenen Mandatsvertrag, SEPA-Mandat und DATEV-Anlage.
-- Verlorene Mandate erhalten einen Grund, damit nicht unsichtbar bleibt, warum eine Anfrage ausgeschieden ist.
-- Automationen sind bewusst explizit: Die Nutzer sehen vorab, was passiert, und müssen bestätigen, bevor eine E-Mail gesendet oder ein Statuswechsel protokolliert wird.
+- Zuständige Teammitglieder über ein Dropdown zuweisen; eigene Namen und Farben können ergänzt werden.
+- Kontaktversuche mit Kanal, Status, Datum und Uhrzeit erfassen.
+- Pflichtschritte wie GwG-Identifizierung, Vollmacht, Mandatsvertrag, SEPA-Mandat und DATEV-Anlage prüfen.
+- Aktivierung blockieren, solange Pflichtschritte fehlen.
+- Automationen vor dem Auslösen bestätigen lassen, damit versehentliches Verschieben keine Benachrichtigung auslöst.
 
 ## Automationen
 
-Die Anwendung enthält vier Automationspunkte:
+Automationen sind an fachlich relevante Phasenübergänge gekoppelt:
 
-- **Erstgespräch geplant**: E-Mail mit Kontext zur Gesprächsvorbereitung an die zuständige Person.
-- **Unterlagen erhalten**: E-Mail mit interner Prüfaufgabe an den konfigurierten Benachrichtigungsempfänger.
-- **Mandatsvertrag versendet**: E-Mail mit offenen Pflichtchecks vor der Aktivierung.
-- **Unterzeichnet & aktiv**: E-Mail zur Übergabe an die laufende Betreuung.
+- Bei geplantem Erstgespräch wird eine Benachrichtigung zur Gesprächsvorbereitung vorbereitet.
+- Bei erhaltenen Unterlagen wird eine interne Prüfaufgabe ausgelöst.
+- Beim versendeten Mandatsvertrag wird auf offene Pflichtschritte hingewiesen.
+- Bei aktivem Mandat wird die Übergabe an die laufende Betreuung angestoßen.
 
-Vor jeder dieser Aktionen öffnet sich ein Bestätigungsdialog. Wird der Dialog abgebrochen, bleibt die Karte in ihrer ursprünglichen Phase.
+Wichtig war mir, dass Automationen nicht heimlich passieren. Wenn eine Karte in eine Phase gezogen wird, die eine Automation auslöst, erscheint vorher ein Bestätigungsdialog. Erst nach Bestätigung wird die Aktion ausgeführt.
 
-## Beispieldaten
+In einer produktiven Version würde der Benachrichtigungsempfänger auf echte Teamrollen und Kanzlei-E-Mail-Adressen gemappt. Für dieses Trial-Projekt steht die fachliche Logik im Vordergrund.
 
-Die Beispieldaten zeigen realistische Mandatsfälle aus typischen Steuerberatungskontexten:
+## UX-Entscheidungen
 
-- GmbH, UG, GbR, GmbH & Co. KG, OHG, Freiberufler, Handwerk und Kleinunternehmen.
-- Unterschiedliche Onboarding-Phasen, Pflichtcheck-Stände, Fälligkeiten und Zuständigkeiten.
-- Pausierte und verlorene Fälle, um nicht-lineare Onboarding-Situationen abzubilden.
+Die Aufgabenstellung fordert Karteninformationen "auf einen Blick". Deshalb zeigt die Kartenansicht alle relevanten Pflichtinformationen, aber in kompakter Form, damit das Board weiterhin schnell scannbar bleibt.
 
-Die Daten sind bewusst fiktiv und dienen nur zur Darstellung des Workflows.
+Einige bewusste Entscheidungen:
 
-## Vorgehen und Tools
+- Der Status wird nicht zusätzlich als Kapsel auf jeder Karte wiederholt, weil die Spalte bereits eindeutig zeigt, in welcher Phase sich ein Mandat befindet.
+- Kontaktversuche erzeugen keine eigene zusätzliche Spalte. Wenn jemand kontaktiert, aber nicht erreicht wurde, bleibt die Anfrage in `Neue Anfrage` und wird direkt auf der Karte markiert.
+- Pflichtchecks erscheinen auf Karten erst dann prominent, wenn sie im Prozess fachlich relevant sind oder bereits begonnen wurden.
+- Detailinformationen bleiben bearbeitbar im Drawer, damit die Übersicht nicht wie ein Formular wirkt.
 
-Mein Vorgehen:
+## Tech-Stack und Begründung
 
-1. Die ursprüngliche Aufgabenstellung in `docs/trial-project-brief.md` als fachlichen Anker festhalten.
-2. Eine kleine Next.js-Anwendung bauen, statt ein Trello-Template oder eine generische Board-Oberfläche zu verwenden.
-3. Erst den Onboarding-Prozess modellieren und dann UI-Interaktionen rund um reale Kanzlei-Aufgaben ergänzen: Kontaktversuche, Dokumentenstatus, Zuständigkeit und Aktivierungschecks.
-4. Übersicht und Detailansicht iterativ reduzieren, damit die Oberfläche ruhig bleibt und wichtige Informationen trotzdem schnell erreichbar sind.
-5. KI-Unterstützung über Codex für schnellere Implementierung, Textprüfung und Refactoring genutzt. Produktentscheidungen und finale Änderungen wurden manuell gegen die Aufgabenstellung geprüft.
-6. Mit lokalen Lint-, Build- und Sicherheitschecks sowie einem Live-Deployment validiert.
+Ich habe Next.js mit TypeScript gewählt, weil sich damit schnell eine saubere, interaktive Oberfläche bauen lässt und die Anwendung trotzdem gut wartbar bleibt.
+
+Weitere Entscheidungen:
+
+- Drag & Drop über `dnd-kit`, weil es zuverlässig und flüssig für Kanban-Interaktionen ist.
+- Zustand für den lokalen Board-Zustand, damit die Trial-Version ohne separates Backend nutzbar bleibt.
+- Tailwind CSS und eigene Guhr-nahe Gestaltung für eine ruhige, professionelle Oberfläche.
+- Serverroute für Benachrichtigungen, damit sensible Versandlogik nicht im Browser liegt.
+
+## Arbeitsprozess und Tools
+
+Mein Ablauf:
+
+1. Aufgabenstellung in eine konkrete Kanzlei-Onboarding-Pipeline übersetzen.
+2. Erst den Kernprozess bauen: Spalten, Karten, Drag & Drop, Detailansicht.
+3. Danach fachliche Details ergänzen: Kontaktversuche, Pflichtschritte, Zuständigkeit, Pausiert/Verloren.
+4. Oberfläche mehrfach reduzieren und nachschärfen, damit sie nicht nach generischem SaaS-Template wirkt.
+5. Automationen mit Sicherheitsabfrage ergänzen.
+6. README, Deployment und Abgabezustand bereinigen.
+
+Als Grundlage diente ein schlanker Next.js-Starter; eine fertige Trello- oder CRM-Vorlage habe ich nicht übernommen. KI-Unterstützung über Codex habe ich für schnellere Umsetzung, Refactoring und Textprüfung genutzt. Die Produktentscheidungen wurden anhand der Aufgabenstellung und des realistischen Kanzlei-Workflows getroffen.
 
 ## Aktuelle Grenzen
 
-- Der Zustand liegt in `localStorage`; die Anwendung ist damit eine lokal lauffähige Trial-Version und noch kein Mehrbenutzer-CRM.
-- E-Mail-Automationen sind als serverseitiger Benachrichtigungsfluss umgesetzt. In einer Produktionsversion würden Teammitglieder auf echte Kanzlei-E-Mail-Adressen, Rollen und providerseitige Templates gemappt.
-- Es gibt noch keine Authentifizierung und kein Rollenmodell.
-- DATEV-, Dokumentenupload- und Anfragequellen-Integrationen sind bewusst nicht enthalten, damit das Trial-Projekt fokussiert bleibt.
+- Die Trial-Version speichert Daten lokal im Browser und ist noch kein Mehrbenutzer-CRM.
+- Es gibt noch keine Anmeldung, Rollen oder Rechteverwaltung.
+- Dokumentenupload, DATEV-Übergabe und echte Anfragequellen sind nicht angebunden.
+- Automationen sind beispielhaft umgesetzt; in Produktion würden sie an echte Teamrollen, Vorlagen und Kanzlei-Systeme angebunden.
 
-## Mit mehr Zeit
+## Was ich mit mehr Zeit verbessern würde
 
-- `localStorage` durch ein Backend wie Postgres mit Prisma ersetzen.
-- Benutzerkonten, Rollen und gemeinsamen Team-Zustand ergänzen.
-- n8n oder weitere providerseitige Workflows für mehrstufige Automationen anbinden.
-- Dokumentenupload, Dokumentenprüfung und DATEV-Übergabe ergänzen.
-- Auswertungen zu Engpässen ergänzen, zum Beispiel in welchen Phasen Anfragen am häufigsten stocken.
+- Gemeinsame Datenbank und Benutzerkonten ergänzen.
+- Rollen für Partner, Sachbearbeitung und Assistenz abbilden.
+- Dokumentenupload und automatische Vollständigkeitsprüfung einbauen.
+- DATEV- oder Dokumentenmanagement-Übergabe vorbereiten.
+- Auswertungen ergänzen, zum Beispiel wo Onboardings am häufigsten stocken.
 - Vollständigere Änderungshistorie pro Mandat ergänzen.
 
 ## Zeitaufwand
 
-Initialer Aufbau inklusive UX-Iterationen, Automationsanbindung, README, Deployment und Validierung: ungefähr 5-6 fokussierte Stunden.
+Initialer Aufbau inklusive UX-Iterationen, Automationslogik, Deployment und Abgabe-Cleanup: ungefähr 5-6 fokussierte Stunden.
